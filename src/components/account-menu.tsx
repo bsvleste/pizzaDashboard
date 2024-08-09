@@ -34,7 +34,7 @@ export function AccountMenu() {
           <Building className="mr-2 h-4 w-4" />
           <span>Perfil da loja</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-rose-500 dark:text-rose-400">
+        <DropdownMenuItem className="cursor-pointer text-rose-500 dark:text-rose-400">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sair</span>
         </DropdownMenuItem>
