@@ -1,15 +1,14 @@
-import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
-import { signIn } from '@/api/sign-in'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToastAction } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
+import { useAthenticate } from '@/hook/useAuthenticate'
 
 const signInForm = z.object({
   email: z.string().email(),
@@ -27,13 +26,14 @@ export function SignIn() {
     },
   })
   const { toast } = useToast()
-  const { mutateAsync: authenticate } = useMutation({
-    mutationFn: signIn,
-  })
+  const { authenticateFn } = useAthenticate()
+  // const { mutateAsync: authenticate } = useMutation({
+  //   mutationFn: signIn,
+  // })
 
   async function handleSignIn(data: SignInForm) {
     try {
-      await authenticate({ email: data.email })
+      await authenticateFn({ email: data.email })
       await new Promise((resolve) => setTimeout(resolve, 2000))
       toast({
         title: 'Pizza Shop',
