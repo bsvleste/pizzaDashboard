@@ -27,9 +27,6 @@ export function SignIn() {
   })
   const { toast } = useToast()
   const { authenticateFn } = useAthenticate()
-  // const { mutateAsync: authenticate } = useMutation({
-  //   mutationFn: signIn,
-  // })
 
   async function handleSignIn(data: SignInForm) {
     try {
