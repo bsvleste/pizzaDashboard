@@ -8,11 +8,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useGetOrders } from '@/hook/useGetOrders'
 
 import { OrdersFormFilter } from './orders-form-filter'
 import { OrdersTableRows } from './orders-table-rows'
 
 export function Orders() {
+  const { results, pagination } = useGetOrders()
+  function handlePagination(pageIndex: number) {
+    pagination(pageIndex)
+  }
   return (
     <>
       <Helmet title="Pedidos" />
@@ -36,13 +41,21 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {Array.from({ length: 10 }).map((_, index) => {
-                  return <OrdersTableRows key={index} />
-                })}
+                {results &&
+                  results.orders.map((order) => {
+                    return <OrdersTableRows key={order.orderId} order={order} />
+                  })}
               </TableBody>
             </Table>
           </div>
-          <Pagination pageIndex={0} totalCount={105} perPage={10} />
+          {results && (
+            <Pagination
+              onPageChange={handlePagination}
+              pageIndex={results?.meta.pageIndex}
+              totalCount={results?.meta.totalCount}
+              perPage={results?.meta.perPage}
+            />
+          )}
         </div>
       </div>
     </>

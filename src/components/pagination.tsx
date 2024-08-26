@@ -11,10 +11,19 @@ interface PaginateProps {
   pageIndex: number
   totalCount: number
   perPage: number
+  onPageChange: (pageIndex: number) => Promise<void> | void
 }
 
-export function Pagination({ pageIndex, totalCount, perPage }: PaginateProps) {
+export function Pagination({
+  pageIndex,
+  totalCount,
+  perPage,
+  onPageChange,
+}: PaginateProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
+  console.log(pages)
+  console.log(pageIndex)
+  console.log(pages < pageIndex + 1)
   return (
     <div className="flex items-center justify-between">
       <span className="text-sm text-muted-foreground">
@@ -26,19 +35,37 @@ export function Pagination({ pageIndex, totalCount, perPage }: PaginateProps) {
           Página {pageIndex + 1} de {pages}
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" className="hidden h-8 w-8 p-0 lg:flex">
+          <Button
+            onClick={() => onPageChange(0)}
+            variant="outline"
+            className="hidden h-8 w-8 p-0 lg:flex"
+            disabled={pageIndex === 0}
+          >
             <span className="sr-only">Primeira página</span>
             <ChevronsLeft className="h-4 w-4" />
           </Button>
-          <Button variant="outline" className="h-8 w-8 p-0">
+          <Button
+            onClick={() => onPageChange(pageIndex - 1)}
+            variant="outline"
+            className="h-8 w-8 p-0"
+          >
             <span className="sr-only">Página anterior</span>
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <Button variant="outline" className="h-8 w-8 p-0">
+          <Button
+            onClick={() => onPageChange(pageIndex + 1)}
+            variant="outline"
+            className="h-8 w-8 p-0"
+          >
             <span className="sr-only">Próxima página</span>
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="outline" className="hidden h-8 w-8 p-0 lg:flex">
+          <Button
+            onClick={() => onPageChange(pages - 1)}
+            variant="outline"
+            className="hidden h-8 w-8 p-0 lg:flex"
+            disabled={pages <= pageIndex + 1}
+          >
             <span className="sr-only">Última página</span>
             <ChevronsRight className="h-4 w-4" />
           </Button>

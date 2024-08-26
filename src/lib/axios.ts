@@ -10,7 +10,7 @@ export const api = axios.create({
 
 // dely nas requiciçoes para backend
 
-api.interceptors.request.use(async (config) => {
+/* api.interceptors.request.use(async (config) => {
   await new Promise((resolve) => setTimeout(resolve, 2000))
   return config
-})
+}) */
