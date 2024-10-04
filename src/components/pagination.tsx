@@ -21,9 +21,7 @@ export function Pagination({
   onPageChange,
 }: PaginateProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
-  console.log(pages)
-  console.log(pageIndex)
-  console.log(pages < pageIndex + 1)
+
   return (
     <div className="flex items-center justify-between">
       <span className="text-sm text-muted-foreground">
@@ -38,7 +36,7 @@ export function Pagination({
           <Button
             onClick={() => onPageChange(0)}
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 disabled:cursor-not-allowed lg:flex"
             disabled={pageIndex === 0}
           >
             <span className="sr-only">Primeira página</span>
@@ -47,7 +45,8 @@ export function Pagination({
           <Button
             onClick={() => onPageChange(pageIndex - 1)}
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 disabled:cursor-not-allowed"
+            disabled={pageIndex === 0}
           >
             <span className="sr-only">Página anterior</span>
             <ChevronLeft className="h-4 w-4" />
@@ -55,7 +54,8 @@ export function Pagination({
           <Button
             onClick={() => onPageChange(pageIndex + 1)}
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 disabled:cursor-not-allowed"
+            disabled={pages <= pageIndex + 1}
           >
             <span className="sr-only">Próxima página</span>
             <ChevronRight className="h-4 w-4" />
@@ -63,7 +63,7 @@ export function Pagination({
           <Button
             onClick={() => onPageChange(pages - 1)}
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 disabled:cursor-not-allowed lg:flex"
             disabled={pages <= pageIndex + 1}
           >
             <span className="sr-only">Última página</span>
