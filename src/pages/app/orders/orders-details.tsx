@@ -1,12 +1,12 @@
-import { DialogTitle } from '@radix-ui/react-dialog'
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -15,17 +15,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { useGetOrderDetails } from '@/hook/useGetOrderDetails'
+} from "@/components/ui/table";
+import { useGetOrderDetails } from "@/hook/useGetOrderDetails";
 
-import { OrderStatus } from './orders-status'
+import { OrderStatus } from "./orders-status";
+import { OrderTableSkeleton } from "./order-table-skeleton";
 
 export interface OrderDetailsProps {
-  orderId: string
-  open: boolean
+  orderId: string;
+  open: boolean;
 }
 export function OrdersDetails({ orderId, open }: OrderDetailsProps) {
-  const { order } = useGetOrderDetails({ orderId, open })
+  const { order } = useGetOrderDetails({ orderId, open });
 
   return (
     <DialogContent>
@@ -34,7 +35,7 @@ export function OrdersDetails({ orderId, open }: OrderDetailsProps) {
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
 
-      {order && (
+      {order ? (
         <div className="spcace-y-6">
           <Table>
             <TableBody>
@@ -55,7 +56,7 @@ export function OrdersDetails({ orderId, open }: OrderDetailsProps) {
                   Telefone
                 </TableCell>
                 <TableCell className="flex justify-end">
-                  {order.customer.phone ?? 'Telefone não informado'}
+                  {order.customer.phone ?? "Telefone não informado"}
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -93,17 +94,17 @@ export function OrdersDetails({ orderId, open }: OrderDetailsProps) {
                   <TableCell>{item.product.name}</TableCell>
                   <TableCell className="text-right">{item.quantity}</TableCell>
                   <TableCell className="text-right">
-                    {(item.priceInCents / 100).toLocaleString('pt-br', {
-                      style: 'currency',
-                      currency: 'BRL',
+                    {(item.priceInCents / 100).toLocaleString("pt-br", {
+                      style: "currency",
+                      currency: "BRL",
                     })}
                   </TableCell>
                   <TableCell className="text-right">
                     {((item.priceInCents / 100) * item.quantity).toLocaleString(
-                      'pt-br',
+                      "pt-br",
                       {
-                        style: 'currency',
-                        currency: 'BRL',
+                        style: "currency",
+                        currency: "BRL",
                       },
                     )}
                   </TableCell>
@@ -114,16 +115,18 @@ export function OrdersDetails({ orderId, open }: OrderDetailsProps) {
               <TableRow>
                 <TableCell colSpan={3}>Total do Pedido</TableCell>
                 <TableCell className="text-medium text-right">
-                  {(order.totalInCents / 100).toLocaleString('pt-br', {
-                    style: 'currency',
-                    currency: 'BRL',
+                  {(order.totalInCents / 100).toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
                   })}
                 </TableCell>
               </TableRow>
             </TableFooter>
           </Table>
         </div>
+      ) : (
+        <OrderTableSkeleton />
       )}
     </DialogContent>
-  )
+  );
 }

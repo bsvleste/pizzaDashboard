@@ -1,22 +1,23 @@
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from "react-helmet-async";
 
-import { Pagination } from '@/components/pagination'
+import { Pagination } from "@/components/pagination";
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { useGetOrders } from '@/hook/useGetOrders'
+} from "@/components/ui/table";
+import { useGetOrders } from "@/hook/useGetOrders";
 
-import { OrdersFormFilter } from './orders-form-filter'
-import { OrdersTableRows } from './orders-table-rows'
+import { OrdersFormFilter } from "./orders-form-filter";
+import { OrdersTableRows } from "./orders-table-rows";
+import { OrderTableSkeleton } from "./order-table-skeleton";
 
 export function Orders() {
-  const { results, pagination } = useGetOrders()
+  const { results, pagination, isLoadingOrders } = useGetOrders();
   function handlePagination(pageIndex: number) {
-    pagination(pageIndex)
+    pagination(pageIndex);
   }
   return (
     <>
@@ -41,9 +42,12 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {isLoadingOrders && <OrderTableSkeleton />}
                 {results &&
                   results.orders.map((order) => {
-                    return <OrdersTableRows key={order.orderId} order={order} />
+                    return (
+                      <OrdersTableRows key={order.orderId} order={order} />
+                    );
                   })}
               </TableBody>
             </Table>
@@ -59,5 +63,5 @@ export function Orders() {
         </div>
       </div>
     </>
-  )
+  );
 }

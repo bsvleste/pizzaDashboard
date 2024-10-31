@@ -1,9 +1,9 @@
-import { Home, Pizza, UtensilsCrossed } from 'lucide-react'
+import { Home, Pizza, UtensilsCrossed } from "lucide-react";
 
-import { AccountMenu } from './account-menu'
-import { NavLink } from './nav-link'
-import { ThemeToggle } from './theme/theme-toggle'
-import { Separator } from './ui/separator'
+import { AccountMenu } from "./account-menu";
+import { NavLink } from "./nav-link";
+import { ThemeToggle } from "./theme/theme-toggle";
+import { Separator } from "./ui/separator";
 
 export function Header() {
   return (
@@ -21,12 +21,12 @@ export function Header() {
             Pedidos
           </NavLink>
         </nav>
-        <p>Parei na aula de Paginacaçao aula 03-parte-2 minuto 17:00</p>
+        <p>Parei na aula #158</p>
         <div className="ml-auto flex items-center gap-2">
           <AccountMenu />
           <ThemeToggle />
         </div>
       </div>
     </div>
-  )
+  );
 }

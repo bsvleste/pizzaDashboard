@@ -1,9 +1,9 @@
-import { BarChart } from 'lucide-react'
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
-import colors from 'tailwindcss/colors'
+import { BarChart, Loader2 } from "lucide-react";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import colors from "tailwindcss/colors";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { usePopularProducts } from '@/hook/usePopularProducts'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { usePopularProducts } from "@/hook/usePopularProducts";
 
 const COLORS = [
   colors.sky[500],
@@ -11,10 +11,10 @@ const COLORS = [
   colors.violet[500],
   colors.emerald[500],
   colors.rose[500],
-]
+];
 
 export function PopularProductsChart() {
-  const { popularProducts } = usePopularProducts()
+  const { popularProducts } = usePopularProducts();
   return (
     <Card className="col-span-3">
       <CardHeader className="pb-8">
@@ -26,7 +26,7 @@ export function PopularProductsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        {popularProducts && (
+        {popularProducts ? (
           <>
             <ResponsiveContainer width="100%" height={240}>
               <PieChart style={{ fontSize: 12 }}>
@@ -50,28 +50,28 @@ export function PopularProductsChart() {
                     value,
                     index,
                   }) => {
-                    const RADIAN = Math.PI / 180
+                    const RADIAN = Math.PI / 180;
                     const radius =
-                      12 + innerRadius + (outerRadius - innerRadius)
-                    const x = cx + radius * Math.cos(-midAngle * RADIAN)
-                    const y = cy + radius * Math.sin(-midAngle * RADIAN)
+                      12 + innerRadius + (outerRadius - innerRadius);
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
                     return (
                       <text
                         x={x}
                         y={y}
                         className="fill-muted-foreground text-xs"
-                        textAnchor={x > cx ? 'start' : 'end'}
+                        textAnchor={x > cx ? "start" : "end"}
                         dominantBaseline="central"
                       >
                         {popularProducts[index].product.length > 12
                           ? popularProducts[index].product
                               .substring(0, 12)
-                              .concat('...')
-                          : popularProducts[index].product}{' '}
+                              .concat("...")
+                          : popularProducts[index].product}{" "}
                         ({value})
                       </text>
-                    )
+                    );
                   }}
                 >
                   {popularProducts.map((_, index) => {
@@ -81,14 +81,18 @@ export function PopularProductsChart() {
                         key={`cel-${index}`}
                         fill={COLORS[index]}
                       />
-                    )
+                    );
                   })}
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
           </>
+        ) : (
+          <div className="flex h-[240px] w-full items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          </div>
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -13,7 +13,7 @@ export function useGetOrders() {
     .number()
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
-  const { data: results } = useQuery({
+  const { data: results,isLoading:isLoadingOrders } = useQuery({
     queryKey: ['orders', pageIndex, orderId, customerName, status],
     queryFn: () =>
       getOrders({
@@ -32,5 +32,6 @@ export function useGetOrders() {
   return {
     results,
     pagination,
+    isLoadingOrders
   }
 }
