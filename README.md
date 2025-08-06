@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# 🍕 Pizza Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Dashboard Preview](https://img.shields.io/badge/status-em%20desenvolvimento-yellow) 
+![React](https://img.shields.io/badge/React-18.2-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue)
 
-Currently, two official plugins are available:
+Um dashboard completo para gerenciamento de pizzarias com interface moderna e funcionalidades avançadas.
+<img width="1295" height="568" alt="pizzashop" src="https://github.com/user-attachments/assets/92679fcb-9a42-4459-861c-171bac6334f5" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades
 
-## Expanding the ESLint configuration
+- 📊 Painel de métricas em tempo real
+- 🛒 Gerenciamento de pedidos (delivery e mesa)
+- 🍕 Controle de cardápio com categorias
+- 📈 Relatórios de vendas personalizáveis
+- 👥 Gestão de usuários e funcionários
+- 🖨️ Integração com impressoras térmicas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Tecnologias
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**Frontend:**
+- React.js 18
+- TypeScript
+- Material-UI (MUI)
+- Redux Toolkit
+- Chart.js
+- Axios
