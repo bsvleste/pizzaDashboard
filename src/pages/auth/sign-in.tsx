@@ -1,50 +1,49 @@
-import { Helmet } from 'react-helmet-async'
-import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
-import { z } from 'zod'
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { Link, useSearchParams } from "react-router-dom";
+import { z } from "zod";
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { ToastAction } from '@/components/ui/toast'
-import { useToast } from '@/components/ui/use-toast'
-import { useAthenticate } from '@/hook/useAuthenticate'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { useAthenticate } from "@/hook/useAuthenticate";
 
 const signInForm = z.object({
   email: z.string().email(),
-})
-type SignInForm = z.infer<typeof signInForm>
+});
+type SignInForm = z.infer<typeof signInForm>;
 export function SignIn() {
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<SignInForm>({
     defaultValues: {
-      email: searchParams.get('email') ?? '',
+      email: searchParams.get("email") ?? "",
     },
-  })
-  const { toast } = useToast()
-  const { authenticateFn } = useAthenticate()
+  });
+  const { toast } = useToast();
+  const { authenticateFn } = useAthenticate();
 
   async function handleSignIn(data: SignInForm) {
     try {
-      await authenticateFn({ email: data.email })
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await authenticateFn({ email: data.email });
       toast({
-        title: 'Pizza Shop',
-        description: `Enviamos um link de authenticação para seu email: ${data.email}`,
-      })
+        title: "Pizza Shop",
+        description: "Enviamos um link de autenticação para seu e-mail.",
+      });
     } catch (error) {
       toast({
-        variant: 'destructive',
-        title: 'Pizza Shop',
-        description: 'Credenciais invalidas',
+        variant: "destructive",
+        title: "Pizza Shop",
+        description: "Credenciais invalidas",
         action: (
           <ToastAction altText="tente novamente">Tente novamente</ToastAction>
         ),
-      })
+      });
     }
   }
   return (
@@ -66,7 +65,7 @@ export function SignIn() {
           <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" {...register('email')} />
+              <Input type="email" id="email" {...register("email")} />
             </div>
             <Button disabled={isSubmitting} className="w-full" type="submit">
               Acessar Painel
@@ -75,5 +74,5 @@ export function SignIn() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -21,7 +21,7 @@ export function Header() {
             Pedidos
           </NavLink>
         </nav>
-        <p>Parei na aula #158</p>
+        <p>Parei na aula Teste E2E SignIn Playrigth</p>
         <div className="ml-auto flex items-center gap-2">
           <AccountMenu />
           <ThemeToggle />

@@ -1,4 +1,3 @@
-import { NavLink } from "@/components/nav-link";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SignIn } from "./sign-in";
